@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:HelloCLT/HelloCLT.xcodeproj">
+      location = "group:MyLibrary">
    </FileRef>
    <FileRef
-      location = "group:HelloLibrary">
+      location = "group:Puissance4/Puissance4.xcodeproj">
    </FileRef>
 </Workspace>
