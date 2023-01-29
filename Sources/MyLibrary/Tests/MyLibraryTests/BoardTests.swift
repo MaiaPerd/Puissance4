@@ -1,7 +1,7 @@
 import XCTest
 @testable import MyLibrary
 
-final class MyLibraryTests: XCTestCase {
+final class BoardTests: XCTestCase {
 
     func testUnitBasicConstructorBoard() throws {
         func expect(initLigne nbLignes: Int, etColonne nbColonnes: Int, res: Bool){

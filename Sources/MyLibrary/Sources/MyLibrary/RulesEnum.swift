@@ -10,7 +10,7 @@ import Foundation
 public enum RulesEnum {
     case unkown
     case egalite
-    case joueur(Int, Combinaison)
+    case joueur(joueur: Int, combinaison: Combinaison, positionStart: [Int])
     case enCours
     case erreur
 }

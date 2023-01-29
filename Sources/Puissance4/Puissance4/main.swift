@@ -45,6 +45,8 @@ if var b = Board(colonnes: 7, lignes: 6) {
     b.insertPiece(id: 1, colonne: 5)
     b.insertPiece(id: 2, colonne: 4)
     b.insertPiece(id: 2, colonne: 5)
+    b.insertPiece(id: 1, colonne: 4)
+    b.insertPiece(id: 1, colonne: 6)
     print(b)
     print(ba.gameEndTest(board: b))
 }
