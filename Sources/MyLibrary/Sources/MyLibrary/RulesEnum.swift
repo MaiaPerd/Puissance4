@@ -7,12 +7,19 @@
 
 import Foundation
 
-public enum RulesEnum {
+public enum RulesEnum : Equatable{
     case unkown
     case egalite
-    case joueur(joueur: Int, combinaison: Combinaison, positionStart: [Int])
+    case joueur(joueur: Int, combinaison: Combinaison, positionStart: [Int]?)
     case enCours
     case erreur
+   
+    func isUnkown()->Bool{
+        if case self = RulesEnum.unkown {
+           return true
+        }
+        return false
+    }
 }
 
 public enum Combinaison{

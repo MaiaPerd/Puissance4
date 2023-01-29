@@ -11,29 +11,38 @@ public struct BasicRule : Rules{
     private let joueur1 = 1
     private let joueur2 = 2
     
-    public func gameEnd(board: Board) -> RulesEnum {
-        guard boardIsValide(board: board) else {return RulesEnum.erreur}
-        var res = Array<RulesEnum>()
-        res.append(ligneAlign(board: board))
-        res.append(colonneAlign(board: board))
-        res.append(diaganalAlignDroite(board: board))
-        res.append(diaganalAlignGauche(board: board))
-        if board.isFull() {
-            return RulesEnum.egalite
-        }
-        return RulesEnum.enCours
-    }
-    
-    public init(){
-      
-    }
-    
     public var nbColonnes: Int { get{ 7 } }
     
     public var nbLignes: Int { get{ 6 } }
     
     public var nbPieceAlign: Int { get{ 4 } }
     
+    public init(){
+      
+    }
+    
+    public func gameEnd(board: Board) -> RulesEnum {
+        guard boardIsValide(board: board) else {return RulesEnum.erreur}
+
+        if !ligneAlign(board: board).isUnkown() {
+            return ligneAlign(board: board)
+        }
+        if !colonneAlign(board: board).isUnkown() {
+            return colonneAlign(board: board)
+        }
+        if !diaganalAlignDroite(board: board).isUnkown() {
+            return diaganalAlignDroite(board: board)
+        }
+        if !diaganalAlignGauche(board: board).isUnkown() {
+            return diaganalAlignGauche(board: board)
+        }
+        if board.isFull() {
+            return RulesEnum.egalite
+        }
+        return RulesEnum.enCours
+    }
+    
+    /*
     public func gameEndTest(board: Board) -> [RulesEnum] {
         guard boardIsValide(board: board) else {return [RulesEnum.erreur]}
         var res = Array<RulesEnum>()
@@ -46,33 +55,33 @@ public struct BasicRule : Rules{
         }
        res.append(RulesEnum.enCours)
         return res
-    }
+    }*/
     
-    func boardIsValide(board: Board)-> Bool{
+    private func boardIsValide(board: Board)-> Bool{
         return board.nbColonnes == nbColonnes && board.nbLignes == nbLignes
     }
     
-    func ligneAlign(board: Board) -> RulesEnum {
+    public func ligneAlign(board: Board) -> RulesEnum {
         var joueursCountLigne = [0,0]
         for l in board.grid{
             joueursCountLigne = [0,0]
             for c in l {
                 if c == joueur1 {
                     joueursCountLigne[0] += 1
-                    if joueursCountLigne[0] == nbPieceAlign { return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.ligne, positionStart: [ 0]) }
+                    if joueursCountLigne[0] == nbPieceAlign { return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.ligne, positionStart: nil) }
                     joueursCountLigne[1] = 0
                 }
                 if c == joueur2 {
-                    joueursCountLigne[0] = 0
-                    if joueursCountLigne[0] == nbPieceAlign { return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.ligne, positionStart: [0]) }
                     joueursCountLigne[1] += 1
+                    if joueursCountLigne[1] == nbPieceAlign { return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.ligne, positionStart: nil) }
+                    joueursCountLigne[0] = 0
                 }
             }
         }
         return RulesEnum.unkown
     }
     
-    func colonneAlign(board: Board) -> RulesEnum {
+    private func colonneAlign(board: Board) -> RulesEnum {
         var joueurs1CountColonne = Array(repeating: 0, count: nbColonnes)
         var joueurs2CountColonne = Array(repeating: 0, count: nbColonnes)
         for l in board.grid{
@@ -80,14 +89,14 @@ public struct BasicRule : Rules{
                 if l[i] == joueur1 {
                     joueurs1CountColonne[i] += 1
                     if joueurs1CountColonne[i] == nbPieceAlign{
-                        return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.ligne, positionStart: [i])
+                        return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.colonne, positionStart: [i])
                     }
                     joueurs2CountColonne[i] = 0
                 }
                 if l[i] == joueur2 {
-                    joueurs2CountColonne[i] += 2
+                    joueurs2CountColonne[i] += 1
                     if joueurs2CountColonne[i] == nbPieceAlign{
-                        return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.ligne, positionStart: [i])
+                        return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.colonne, positionStart: [i])
                     }
                     joueurs1CountColonne[i] = 0
                 }
@@ -96,7 +105,7 @@ public struct BasicRule : Rules{
         return RulesEnum.unkown
     }
     
-    func diaganalAlignDroite(board: Board) -> RulesEnum {
+    private func diaganalAlignDroite(board: Board) -> RulesEnum {
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
         let grid = board.grid
@@ -143,7 +152,7 @@ public struct BasicRule : Rules{
         return RulesEnum.unkown
     }
     
-    func diaganalAlignGauche(board: Board) -> RulesEnum {
+    private func diaganalAlignGauche(board: Board) -> RulesEnum {
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
         let grid = board.grid
