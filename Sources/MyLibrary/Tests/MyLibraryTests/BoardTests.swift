@@ -86,4 +86,38 @@ final class BoardTests: XCTestCase {
         expect(initBorad: Board(grid: [[nil,nil,nil],[nil,nil,nil]]), res: false)
         expect(initBorad: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]]), res: false)
     }
+    
+    func testUnitColonneIsFull() throws {
+        func expect(initBorad board: Board?, numColonne: Int, res: Bool){
+            if(board == nil){
+                return
+            }
+            var board = board
+            
+            XCTAssertEqual(res, board?.colonneIsFull(numColonne: numColonne))
+        }
+        
+        expect(initBorad: Board(colonnes: 7, lignes: 6), numColonne: 0, res: false)
+        expect(initBorad: Board(grid: [[1,1,2],[1,2,2],[1,1,1]]), numColonne: 1, res: true)
+        expect(initBorad: Board(grid: [[1,1,2],[1,2,2],[nil,1,1]]), numColonne: 0, res: false)
+        expect(initBorad: Board(grid: [[nil,nil,nil],[nil,nil,nil]]), numColonne: 2, res: false)
+        expect(initBorad: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]]), numColonne: 2, res: true)
+    }
+    
+    func testUnitSubScript() throws {
+        func expect(initBorad board: Board?, ligne: Int, colonne: Int, res: Int?){
+            if(board == nil){
+                return
+            }
+            var board = board
+            
+            XCTAssertEqual(res, board?.subSript(ligne: ligne, colonne: colonne))
+        }
+        
+        expect(initBorad: Board(colonnes: 7, lignes: 6), ligne: 1, colonne: 0, res: nil)
+        expect(initBorad: Board(grid: [[1,1,2],[1,2,2],[1,1,1]]), ligne: 1, colonne: 0, res: 1)
+        expect(initBorad: Board(grid: [[nil,1,2],[1,2,2],[1,1,1]]), ligne: 0, colonne: 0, res: nil)
+        expect(initBorad: Board(grid: [[nil,nil,nil],[nil,nil,nil]]), ligne: 1, colonne: 0, res: nil)
+        expect(initBorad: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]]), ligne: 0, colonne: 2, res: 2)
+    }
 }

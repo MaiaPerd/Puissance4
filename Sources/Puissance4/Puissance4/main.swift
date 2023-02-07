@@ -16,40 +16,39 @@ if var b = Board(grid: [[1,1,2,nil],[1,2,nil,nil],[nil,nil,nil,nil],[nil,nil,nil
     print(b)
     b.insertPiece(id: 1, colonne: 3)
     print(b)
-    print(ba.gameEnd(board: b))
 }
 
-if var b = Board(colonnes: 7, lignes: 6) {
-    print(b)
-    b.insertPiece(id: 1, colonne: 3)
- 
-    b.insertPiece(id: 2, colonne: 3)
-    b.insertPiece(id: 1, colonne: 3)
-    b.insertPiece(id: 2, colonne: 3)
-    b.insertPiece(id: 1, colonne: 3)
-    b.insertPiece(id: 2, colonne: 3)
-    print(b)
-    print(ba.gameEnd(board: b))
-    b.insertPiece(id: 2, colonne: 2)
-    b.insertPiece(id: 1, colonne: 4)
-    b.insertPiece(id: 2, colonne: 1)
-    b.insertPiece(id: 1, colonne: 5)
-    b.insertPiece(id: 1, colonne: 6)
-    print(b)
-    print(ba.gameEnd(board: b))
-    b.insertPiece(id: 2, colonne: 2)
-    b.insertPiece(id: 2, colonne: 2)
-    b.insertPiece(id: 2, colonne: 2)
-    b.insertPiece(id: 1, colonne: 4)
-    b.insertPiece(id: 2, colonne: 5)
-    b.insertPiece(id: 1, colonne: 5)
-    b.insertPiece(id: 2, colonne: 4)
-    b.insertPiece(id: 2, colonne: 5)
-    b.insertPiece(id: 1, colonne: 4)
-    b.insertPiece(id: 1, colonne: 6)
-    print(b)
-    print(ba.gameEnd(board: b))
-    
+
+
+
+func Scanner()->Int{
+    print("Saisir le numéro de la colonne \n")
+    var res: Int? = nil
+    while(res==nil){
+        var saisie = readLine(strippingNewline: true)
+        if let s = saisie {
+            res = Int(s) ?? nil
+        }
+    }
+    return res! - 1
 }
 
+var basicRule = BasicRule()
+
+var board = basicRule.createBoard()
+
+var h = Humain(scanner: Scanner)
+
+print(board)
+
+var i = h.choisirColonne(LeBoard: board, LaRegle: basicRule)
+
+if var piece = i{
+    if basicRule.isValid(board: board, newPieceColonne: piece) {
+        board.insertPiece(id: 1, colonne: piece)
+    }
+}
+
+
+print(board)
 

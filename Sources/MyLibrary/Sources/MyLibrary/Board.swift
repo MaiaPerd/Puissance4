@@ -61,7 +61,7 @@ public struct Board : CustomStringConvertible {
     }
     
     public mutating func insertPiece(id: Int, colonne: Int)-> BoardEnum{
-        guard colonne > 0 && colonne < nbColonnes else {
+        guard colonne >= 0 && colonne < nbColonnes else {
             return BoardEnum.failed
         }
         for l in 0..<nbLignes{
@@ -93,11 +93,27 @@ public struct Board : CustomStringConvertible {
         return true
     }
     
+    public func colonneIsFull(numColonne: Int)->Bool{
+        return grid[nbLignes-1][numColonne] != nil
+    }
+    
     public func subSript(ligne: Int, colonne: Int)-> Int? {
         guard (0..<nbLignes).contains(ligne) && (0..<nbColonnes).contains(colonne) else {
             return nil
         }
         return grid[ligne][colonne]
+    }
+    
+    public func nbJoueur(numJoueur: Int)->Int{
+        var nb = 0
+        for l in grid{
+            for c in l {
+                if c == numJoueur {
+                    nb += 1
+                }
+            }
+        }
+        return nb
     }
     
 }

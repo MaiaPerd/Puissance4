@@ -14,12 +14,6 @@ public enum RulesEnum : Equatable{
     case enCours
     case erreur
    
-    func isUnkown()->Bool{
-        if case self = RulesEnum.unkown {
-           return true
-        }
-        return false
-    }
 }
 
 public enum Combinaison{
