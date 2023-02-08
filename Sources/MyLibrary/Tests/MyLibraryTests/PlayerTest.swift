@@ -13,11 +13,15 @@ final class PlayerTests: XCTestCase {
         expect(nom: "zadvdosvjihoqsc_Dcnkndjkz", res: "zadvdosvjihoqsc_Dcnkndjkz")
     }
     
+    func testUnitChoisirColonne() throws {
+        XCTAssertEqual(Player().choisirColonne(LeBoard: BasicRule().createBoard(), LaRegle: BasicRule()), nil)
+    }
+    
     func Scanner()->Int{
         print("Saisir le numéro de la colonne \n")
         var res: Int? = nil
         while(res==nil){
-            var saisie = readLine(strippingNewline: true)
+            let saisie = readLine(strippingNewline: true)
             if let s = saisie {
                 res = Int(s) ?? nil
             }

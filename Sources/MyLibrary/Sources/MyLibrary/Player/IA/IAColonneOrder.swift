@@ -7,10 +7,10 @@
 
 import Foundation
 
-public class IARandomOrder: IA {
+public class IAColonneOrder: IA {
 
     public override init(){
-        super.init(nom: "IARandomOrder")
+        super.init(nom: "IA colonne dans l'ordre")
     }
     
     public override init(nom: String) {

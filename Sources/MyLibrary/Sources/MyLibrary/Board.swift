@@ -11,6 +11,7 @@ public struct Board : CustomStringConvertible {
     
     public var description: String{
         var string = String()
+        string.append("\n")
         for l in grid.reversed(){
             string.append(" | ")
             for c in l {
@@ -18,6 +19,10 @@ public struct Board : CustomStringConvertible {
             }
             string.append("\n")
         }
+        for n in 1...grid.count+1{
+            string.append("   \(n)")
+        }
+        string.append("\n")
         return string
     }
     

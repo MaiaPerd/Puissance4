@@ -39,7 +39,7 @@ final class BasicRuleTests: XCTestCase {
                                        [2,1,1,2,2,1,2],
                                        [1,2,2,1,1,2,1],
                                        [2,1,2,1,2,1,2]])!,
-                                       res: RulesEnum.erreur)
+                                       res: RulesEnum.egalite)
         
     }
     
@@ -128,5 +128,34 @@ final class BasicRuleTests: XCTestCase {
                res: RulesEnum.joueur(joueur: 1, combinaison: Combinaison.diagonalGauche, positionStart: [1,5]))
     }
     
+    func testUnitCreateBoard() throws {
+        var board = BasicRule().createBoard()
+        XCTAssertEqual(board.nbColonnes, BasicRule.nbColonnes)
+        XCTAssertEqual(board.nbLignes, BasicRule.nbLignes)
+    }
     
+    func testUnitGetNextJoueur() throws {
+        func expect(initBoard board: Board, res: Int){
+            XCTAssertEqual(res, BasicRule().getNextPlayer(board: board))
+        }
+        
+        expect(initBoard: Board(grid: [[nil,nil,nil,nil,nil,nil,nil],
+                                        [nil,nil,nil,nil,nil,nil,nil],
+                                        [nil,nil,nil,nil,nil,nil,nil],
+                                        [nil,nil,nil,nil,nil,nil,nil],
+                                        [nil,nil,nil,nil,nil,nil,nil],
+                                        [nil,nil,nil,nil,nil,nil,nil]])!, res: 1)
+        expect(initBoard: Board(grid: [[  1,  2,  2,  1,  1,  1,  2],
+                                       [  1,  2,  1,  2,  1,  2,nil],
+                                       [nil,  1,  1,  1,  2,  2,nil],
+                                       [nil,nil,  2,  2,  1,  1,nil],
+                                       [nil,nil,nil,nil,  2,nil,nil],
+                                       [nil,nil,nil,nil,nil,nil,nil]])!, res: 2)
+        expect(initBoard: Board(grid: [[  1,  2,  2,  1,  1,  1,  2],
+                                       [  1,  2,  1,  2,  1,  2,nil],
+                                       [nil,nil,  1,  1,  2,  2,nil],
+                                       [nil,nil,  2,  2,  1,  1,nil],
+                                       [nil,nil,nil,nil,  2,nil,nil],
+                                       [nil,nil,nil,nil,nil,nil,nil]])!, res: 1)
+    }
 }

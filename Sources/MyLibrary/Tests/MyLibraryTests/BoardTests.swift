@@ -49,7 +49,7 @@ final class BoardTests: XCTestCase {
     }
     
     func testUnitInsertPiece() throws {
-        var board = Board(colonnes: 7, lignes: 6)
+        let board = Board(colonnes: 7, lignes: 6)
         func expect(initBorad board: Board?, id: Int, colonne: Int, res: Bool){
             if(board == nil){
                 return
@@ -67,57 +67,55 @@ final class BoardTests: XCTestCase {
         expect(initBorad: board, id: 2, colonne: 8, res: false)
         expect(initBorad: board, id: 1, colonne: 2, res: true)
         expect(initBorad: board, id: 1, colonne: -1, res: false)
-        expect(initBorad: board, id: 1, colonne: 0, res: false)
+        expect(initBorad: board, id: 1, colonne: 0, res: true)
     }
     
     func testUnitIsFull() throws {
-        func expect(initBorad board: Board?, res: Bool){
-            if(board == nil){
-                return
-            }
-            var board = board
-            
-            XCTAssertEqual(res, board?.isFull())
+        func expect(initBoard board: Board, res: Bool){
+            XCTAssertEqual(res, board.isFull())
         }
         
-        expect(initBorad: Board(colonnes: 7, lignes: 6), res: false)
-        expect(initBorad: Board(grid: [[1,1,2],[1,2,2],[1,1,1]]), res: true)
-        expect(initBorad: Board(grid: [[nil,1,2],[1,2,2],[1,1,1]]), res: false)
-        expect(initBorad: Board(grid: [[nil,nil,nil],[nil,nil,nil]]), res: false)
-        expect(initBorad: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]]), res: false)
+        expect(initBoard: Board(colonnes: 7, lignes: 6)!, res: false)
+        expect(initBoard: Board(grid: [[1,1,2],[1,2,2],[1,1,1]])!, res: true)
+        expect(initBoard: Board(grid: [[nil,1,2],[1,2,2],[1,1,1]])!, res: false)
+        expect(initBoard: Board(grid: [[nil,nil,nil],[nil,nil,nil]])!, res: false)
+        expect(initBoard: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]])!, res: false)
     }
     
     func testUnitColonneIsFull() throws {
-        func expect(initBorad board: Board?, numColonne: Int, res: Bool){
-            if(board == nil){
-                return
-            }
-            var board = board
-            
-            XCTAssertEqual(res, board?.colonneIsFull(numColonne: numColonne))
+        func expect(initBoard board: Board, numColonne: Int, res: Bool){
+            XCTAssertEqual(res, board.colonneIsFull(numColonne: numColonne))
         }
         
-        expect(initBorad: Board(colonnes: 7, lignes: 6), numColonne: 0, res: false)
-        expect(initBorad: Board(grid: [[1,1,2],[1,2,2],[1,1,1]]), numColonne: 1, res: true)
-        expect(initBorad: Board(grid: [[1,1,2],[1,2,2],[nil,1,1]]), numColonne: 0, res: false)
-        expect(initBorad: Board(grid: [[nil,nil,nil],[nil,nil,nil]]), numColonne: 2, res: false)
-        expect(initBorad: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]]), numColonne: 2, res: true)
+        expect(initBoard: Board(colonnes: 7, lignes: 6)!, numColonne: 0, res: false)
+        expect(initBoard: Board(grid: [[1,1,2],[1,2,2],[1,1,1]])!, numColonne: 1, res: true)
+        expect(initBoard: Board(grid: [[1,1,2],[1,2,2],[nil,1,1]])!, numColonne: 0, res: false)
+        expect(initBoard: Board(grid: [[nil,nil,nil],[nil,nil,nil]])!, numColonne: 2, res: false)
+        expect(initBoard: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]])!, numColonne: 2, res: true)
     }
     
     func testUnitSubScript() throws {
-        func expect(initBorad board: Board?, ligne: Int, colonne: Int, res: Int?){
-            if(board == nil){
-                return
-            }
-            var board = board
+        func expect(initBoard board: Board, ligne: Int, colonne: Int, res: Int?){
             
-            XCTAssertEqual(res, board?.subSript(ligne: ligne, colonne: colonne))
+            XCTAssertEqual(res, board.subSript(ligne: ligne, colonne: colonne))
         }
         
-        expect(initBorad: Board(colonnes: 7, lignes: 6), ligne: 1, colonne: 0, res: nil)
-        expect(initBorad: Board(grid: [[1,1,2],[1,2,2],[1,1,1]]), ligne: 1, colonne: 0, res: 1)
-        expect(initBorad: Board(grid: [[nil,1,2],[1,2,2],[1,1,1]]), ligne: 0, colonne: 0, res: nil)
-        expect(initBorad: Board(grid: [[nil,nil,nil],[nil,nil,nil]]), ligne: 1, colonne: 0, res: nil)
-        expect(initBorad: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]]), ligne: 0, colonne: 2, res: 2)
+        expect(initBoard: Board(colonnes: 7, lignes: 6)!, ligne: 1, colonne: 0, res: nil)
+        expect(initBoard: Board(grid: [[1,1,2],[1,2,2],[1,1,1]])!, ligne: 1, colonne: 0, res: 1)
+        expect(initBoard: Board(grid: [[nil,1,2],[1,2,2],[1,1,1]])!, ligne: 0, colonne: 0, res: nil)
+        expect(initBoard: Board(grid: [[nil,nil,nil],[nil,nil,nil]])!, ligne: 1, colonne: 0, res: nil)
+        expect(initBoard: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]])!, ligne: 0, colonne: 2, res: 2)
+    }
+    
+    func testUnitNbJoueur() throws {
+        func expect(initBoard board: Board, numJoueur: Int, res: Int){
+            XCTAssertEqual(res, board.nbJoueur(numJoueur: numJoueur))
+        }
+        
+        expect(initBoard: Board(colonnes: 7, lignes: 6)!, numJoueur: 1, res: 0)
+        expect(initBoard: Board(grid: [[1,1,2],[1,2,2],[1,1,1]])!, numJoueur: 2, res: 3)
+        expect(initBoard: Board(grid: [[nil,1,2],[1,2,2],[1,1,1]])!, numJoueur: 1, res: 5)
+        expect(initBoard: Board(grid: [[nil,nil,nil],[nil,nil,nil]])!, numJoueur: 2, res: 0)
+        expect(initBoard: Board(grid: [[1,1,2],[nil,nil,nil],[1,1,1]])!, numJoueur: 2, res: 1)
     }
 }

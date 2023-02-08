@@ -22,7 +22,7 @@ public class Humain: Player{
     }
     
     public override func choisirColonne(LeBoard board: Board, LaRegle regle: Rules)->Int?{
-        var s = scanner()
+        let s = scanner()
         if regle.isValid(board: board, newPieceColonne: s) {
             return s
         }
