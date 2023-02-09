@@ -43,6 +43,11 @@ var ia2 = IAColonneOrder()
 
 var ia3 = IALigneOrder()
 
-var game = Game(joueur1: h, joueur2: h, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)
+var ia4 = IAColonne(numPlayer: 2)
+var ia5 = IAColonne(numPlayer: 1)
+var ia6 = IALigne(numPlayer: 1)
+var ia7 = IALigne(numPlayer: 2)
+
+var game = Game(joueur1: ia4, joueur2: ia5, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)
 
 game.jouer()

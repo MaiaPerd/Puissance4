@@ -7,12 +7,15 @@
 
 import Foundation
 
+///
+/// Protocol Rules: Regle du puissance 4
+///
 public protocol Rules{
     
     static var nbColonnes: Int  { get }
     static var nbLignes: Int { get }
     
-    static var nbPieceAlign: Int { get }
+    var nbPieceAlign: Int { get }
     
     func createBoard()-> Board
     

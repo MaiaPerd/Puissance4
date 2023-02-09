@@ -2,12 +2,12 @@
 //  File.swift
 //  
 //
-//  Created by Perderizet Maïa on 08/02/2023.
+//  Created by Perderizet Maïa on 09/02/2023.
 //
 
 import Foundation
 
-public class IAColonne: IA {
+public class IALigne: IA {
 
     private var numPlayer: Int
     
@@ -22,23 +22,25 @@ public class IAColonne: IA {
     }
     
     internal override func random(LeBoard board: Board, regle: Rules) -> Int?{
-        for colonne in 0..<board.nbColonnes{
-            var nbPiecePosisible = 0
-            for ligne in 0..<board.nbLignes{
-                if board.grid[ligne][colonne] == nil{
-                    nbPiecePosisible = nbPiecePosisible + 1
+        for ligne in 0..<board.nbLignes{
+            var nbPiecePosisible = Array<Int>()
+            for colonne in 0..<(board.nbColonnes){
+                if board.grid[ligne][colonne] == nil {
+                    nbPiecePosisible.append(colonne)
+                } else {
+                    nbPiecePosisible = []
+                }
+                if nbPiecePosisible.count >= regle.nbPieceAlign {
+                    return colonne - (regle.nbPieceAlign-1)
                 }
             }
-            if nbPiecePosisible >= regle.nbPieceAlign {
-                return colonne
-            }
         }
+    
         for colonne in 0..<board.nbColonnes{
             guard board.colonneIsFull(numColonne: colonne) else {
                 return colonne
             }
         }
-       
         return nil;
     }
     

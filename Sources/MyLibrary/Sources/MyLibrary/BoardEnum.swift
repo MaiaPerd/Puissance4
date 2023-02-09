@@ -7,6 +7,9 @@
 
 import Foundation
 
+///
+/// Enum BoardEnum: Les différents cas de réusite de la création du board
+///
 public enum BoardEnum {
     case unkown
     case ok

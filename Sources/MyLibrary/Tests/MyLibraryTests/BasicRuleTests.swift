@@ -4,7 +4,6 @@ import XCTest
 final class BasicRuleTests: XCTestCase {
 
     func testUnitConstructorRule() throws {
-        XCTAssertEqual(BasicRule.nbPieceAlign, 4)
         XCTAssertEqual(BasicRule.nbLignes, 6)
         XCTAssertEqual(BasicRule.nbColonnes, 7)
     }

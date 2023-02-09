@@ -7,6 +7,9 @@
 
 import Foundation
 
+///
+/// Struct BasicRule: regles classique du puissance 4
+///
 public struct BasicRule : Rules{
     private let joueur1 = 1
     private let joueur2 = 2
@@ -15,7 +18,7 @@ public struct BasicRule : Rules{
     
     static public var nbLignes: Int { get{ 6 } }
     
-    static public var nbPieceAlign: Int { get{ 4 } }
+    public var nbPieceAlign: Int { get{ 4 } }
     
     public init(){
       
@@ -43,7 +46,6 @@ public struct BasicRule : Rules{
     }
     
     public func gameEnd(board: Board, newPiece position: Int) ->  RulesEnum{
-        print(board)
         guard boardIsValide(board: board) else {return RulesEnum.erreur}
         if !(ligneAlign(board: board, position: position) == RulesEnum.unkown) {
             return ligneAlign(board: board, position: position)
@@ -69,13 +71,13 @@ public struct BasicRule : Rules{
     }
     
     private func minColonne(_ colonne: Int) -> Int{
-        var minColonne = (colonne - (BasicRule.nbPieceAlign-1))
+        var minColonne = (colonne - (nbPieceAlign-1))
         if minColonne < 0 { minColonne = 0}
         return minColonne
     }
     
     private func maxColonne(_ colonne: Int) -> Int{
-        var maxColonne = (colonne + (BasicRule.nbPieceAlign-1))
+        var maxColonne = (colonne + (nbPieceAlign-1))
         if maxColonne > BasicRule.nbColonnes-1 { maxColonne = BasicRule.nbColonnes-1}
         return maxColonne
     }
@@ -87,12 +89,14 @@ public struct BasicRule : Rules{
          for i in minColonne(colonne)...maxColonne(colonne) {
              if l[i] == joueur1 {
                 joueursCountLigne[0] += 1
-                 if joueursCountLigne[0] == BasicRule.nbPieceAlign { return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.ligne, positionStart: [(board.grid.firstIndex(of: l) ?? 0), i-(BasicRule.nbPieceAlign-1)]) }
+                 if joueursCountLigne[0] == nbPieceAlign {
+                     return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.ligne, positionStart: [(board.grid.firstIndex(of: l) ?? 0), i-(nbPieceAlign-1)]) }
                     joueursCountLigne[1] = 0
                 }
             if l[i] == joueur2 {
                 joueursCountLigne[1] += 1
-                if joueursCountLigne[1] == BasicRule.nbPieceAlign { return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.ligne, positionStart: [(board.grid.firstIndex(of: l) ?? 0), i-(BasicRule.nbPieceAlign-1)]) }
+                if joueursCountLigne[1] == nbPieceAlign {
+                    return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.ligne, positionStart: [(board.grid.firstIndex(of: l) ?? 0), i-(nbPieceAlign-1)]) }
                     joueursCountLigne[0] = 0
                 }
             if l[i] == nil{
@@ -108,43 +112,40 @@ public struct BasicRule : Rules{
     private func colonneAlign(board: Board, position colonne: Int) -> RulesEnum {
         var joueurs1CountColonne = Array(repeating: 0, count: BasicRule.nbColonnes)
         var joueurs2CountColonne = Array(repeating: 0, count: BasicRule.nbColonnes)
+        var ligne = 0
         for l in board.grid{
-            for i in minColonne(colonne)...maxColonne(colonne) {
-                if l[i] == joueur1 {
-                    joueurs1CountColonne[i] += 1
-                    if joueurs1CountColonne[i] == BasicRule.nbPieceAlign{
-                        return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.colonne, positionStart: [(board.grid.firstIndex(of: l) ?? 0)-(BasicRule.nbPieceAlign-1), i])
+                if l[colonne] == joueur1 {
+                    joueurs1CountColonne[colonne] += 1
+                    if joueurs1CountColonne[colonne] == nbPieceAlign{
+                        return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.colonne, positionStart: [ligne-(nbPieceAlign-1), colonne])
                     }
-                    joueurs2CountColonne[i] = 0
+                    joueurs2CountColonne[colonne] = 0
                 }
-                if l[i] == joueur2 {
-                    joueurs2CountColonne[i] += 1
-                    if joueurs2CountColonne[i] == BasicRule.nbPieceAlign{
-                        return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.colonne, positionStart: [(board.grid.firstIndex(of: l) ?? 0)-(BasicRule.nbPieceAlign-1), i])
+                if l[colonne] == joueur2 {
+                    joueurs2CountColonne[colonne] += 1
+                    if joueurs2CountColonne[colonne] == nbPieceAlign{
+                        return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.colonne, positionStart: [ligne-(nbPieceAlign-1), colonne])
                     }
-                    joueurs1CountColonne[i] = 0
+                    joueurs1CountColonne[colonne] = 0
                 }
-                if l[i] == nil{
-                    joueurs1CountColonne[i] = 0
-                    joueurs2CountColonne[i] = 0
+                if l[colonne] == nil{
+                    joueurs1CountColonne[colonne] = 0
+                    joueurs2CountColonne[colonne] = 0
                 }
-            }
+            ligne += 1
         }
         return RulesEnum.unkown
     }
     
     private func diaganalAlignDroite(board: Board, position numColonne: Int) -> RulesEnum {
-        if numColonne+BasicRule.nbPieceAlign > BasicRule.nbColonnes {
-            return RulesEnum.unkown
-        }
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
         let grid = board.grid
-        for ligne in 0..<BasicRule.nbLignes-(BasicRule.nbPieceAlign){
-            for i in minColonne(numColonne)...(maxColonne(numColonne)-(BasicRule.nbPieceAlign-1)) {
+        for ligne in 0..<BasicRule.nbLignes-(nbPieceAlign){
+            for i in minColonne(numColonne)...(maxColonne(numColonne)-(nbPieceAlign-1)) {
                 joueurs1CountColonne = 0
                 joueurs2CountColonne = 0
-                for nombre in 0..<BasicRule.nbPieceAlign{
+                for nombre in 0..<nbPieceAlign{
                     if grid[ligne+nombre][i+nombre] == joueur1 {
                         joueurs1CountColonne = joueurs1CountColonne + 1
                         joueurs2CountColonne = 0
@@ -156,8 +157,8 @@ public struct BasicRule : Rules{
                         joueurs2CountColonne = 0
                     }
                     
-                    if joueurs1CountColonne == BasicRule.nbPieceAlign { return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.diagonalDroite, positionStart: [ligne,i])}
-                    else if joueurs2CountColonne == BasicRule.nbPieceAlign  { return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.diagonalDroite, positionStart: [ligne,i])}
+                    if joueurs1CountColonne == nbPieceAlign { return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.diagonalDroite, positionStart: [ligne,i])}
+                    else if joueurs2CountColonne == nbPieceAlign  { return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.diagonalDroite, positionStart: [ligne,i])}
                 }
                 
             }
@@ -187,17 +188,14 @@ public struct BasicRule : Rules{
     }
     
     private func diaganalAlignGauche(board: Board, position numColonne: Int) -> RulesEnum {
-        if numColonne < BasicRule.nbPieceAlign {
-            return RulesEnum.unkown
-        }
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
         let grid = board.grid
-        for ligne in (0..<BasicRule.nbLignes-BasicRule.nbPieceAlign){
-            for i in ((minColonne(numColonne)+(BasicRule.nbPieceAlign-1))...maxColonne(numColonne)).reversed() {
+        for ligne in (0..<BasicRule.nbLignes-nbPieceAlign){
+            for i in ((minColonne(numColonne)+(nbPieceAlign-1))...maxColonne(numColonne)).reversed() {
                 joueurs1CountColonne = 0
                 joueurs2CountColonne = 0
-                for nombre in 0..<BasicRule.nbPieceAlign{
+                for nombre in 0..<nbPieceAlign{
                     if grid[ligne+nombre][i-nombre] == joueur1 {
                         joueurs1CountColonne = joueurs1CountColonne + 1
                         joueurs2CountColonne = 0
@@ -209,8 +207,8 @@ public struct BasicRule : Rules{
                         joueurs2CountColonne = 0
                     }
                 }
-                if joueurs1CountColonne == BasicRule.nbPieceAlign { return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.diagonalGauche, positionStart: [ligne,i])}
-                else if joueurs2CountColonne == BasicRule.nbPieceAlign  { return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.diagonalGauche, positionStart: [ligne,i])}
+                if joueurs1CountColonne == nbPieceAlign { return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.diagonalGauche, positionStart: [ligne,i])}
+                else if joueurs2CountColonne == nbPieceAlign  { return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.diagonalGauche, positionStart: [ligne,i])}
                 
             }
             

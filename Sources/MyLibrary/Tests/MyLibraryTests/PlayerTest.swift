@@ -18,15 +18,7 @@ final class PlayerTests: XCTestCase {
     }
     
     func Scanner()->Int{
-        print("Saisir le numéro de la colonne \n")
-        var res: Int? = nil
-        while(res==nil){
-            let saisie = readLine(strippingNewline: true)
-            if let s = saisie {
-                res = Int(s) ?? nil
-            }
-        }
-        return res! - 1
+        return 1
     }
     
     func testUnitConstructorHumain() throws {
@@ -37,6 +29,11 @@ final class PlayerTests: XCTestCase {
         expect(nom: "Joueur", res: "Joueur")
         expect(nom: "zadvdosvjihoqsc_Dcnkndjkz", res: "zadvdosvjihoqsc_Dcnkndjkz")
     }
+    
+    func testUnitJouerHumain() throws {
+        XCTAssertEqual(Humain(scanner: Scanner).choisirColonne(LeBoard: Board(colonnes: 6, lignes: 7)!, LaRegle: BasicRule()), 1)
+    }
+    
     
     func testUnitConstructorIA() throws {
         XCTAssertEqual(IA().nom, "IA")

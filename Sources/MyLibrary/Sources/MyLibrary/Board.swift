@@ -7,6 +7,9 @@
 
 import Foundation
 
+///
+/// Struct Board: Tableau du puissance 4
+///
 public struct Board : CustomStringConvertible {
     
     public var description: String{

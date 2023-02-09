@@ -7,6 +7,9 @@
 
 import Foundation
 
+///
+/// Class Player: Joueur du puissance 4
+///
 public class Player{
     
     public let nom: String
