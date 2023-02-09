@@ -48,6 +48,6 @@ var ia5 = IAColonne(numPlayer: 1)
 var ia6 = IALigne(numPlayer: 1)
 var ia7 = IALigne(numPlayer: 2)
 
-var game = Game(joueur1: ia4, joueur2: ia5, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)
+var game = Game(joueur1: h, joueur2: ia, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)
 
 game.jouer()

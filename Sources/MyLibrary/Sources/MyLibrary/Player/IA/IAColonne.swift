@@ -7,6 +7,10 @@
 
 import Foundation
 
+///
+/// Class IAColonne: hérite de IA
+/// Cette classe est une IA qui va essayer de gagner en faisant une colonne
+///
 public class IAColonne: IA {
 
     private var numPlayer: Int

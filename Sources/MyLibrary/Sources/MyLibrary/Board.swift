@@ -35,6 +35,9 @@ public struct Board : CustomStringConvertible {
     public let nbLignes: Int
     var grid: [[Int?]]
     
+    ///
+    /// Initializeur qui crée un board avec une grille déjà existante
+    ///
     public init?(grid: [[Int?]]) {
         guard grid.count > 0 && grid[0].count > 0 else {
             return nil
@@ -48,6 +51,9 @@ public struct Board : CustomStringConvertible {
         self.grid = grid
     }
     
+    ///
+    /// Initializeur qui crée un board avec une grille qui a les dimention des variable en paramètre
+    ///
     public init?(colonnes nbColonnes: Int, lignes nbLignes: Int) {
         guard nbLignes > 0 && nbColonnes > 0 else {
             return nil
@@ -57,6 +63,9 @@ public struct Board : CustomStringConvertible {
         self.grid = Array(repeating: Array(repeating: nil, count: nbColonnes), count: nbLignes)
     }
     
+    ///
+    /// Insert une piece dans la grille
+    ///
     private mutating func insertPiece(joueur id: Int, ligne: Int, colonne: Int)-> BoardEnum{
         guard (0..<nbLignes).contains(ligne) && (0..<nbColonnes).contains(colonne) else {
             return BoardEnum.failed
@@ -68,6 +77,9 @@ public struct Board : CustomStringConvertible {
         return BoardEnum.ok
     }
     
+    ///
+    /// Insert une piece dans la grille
+    ///
     public mutating func insertPiece(id: Int, colonne: Int)-> BoardEnum{
         guard colonne >= 0 && colonne < nbColonnes else {
             return BoardEnum.failed
@@ -80,6 +92,9 @@ public struct Board : CustomStringConvertible {
         return BoardEnum.failed
     }
     
+    ///
+    /// Supprime une pièce
+    ///
     private mutating func removePiece(id: Int, ligne: Int, colonne: Int)-> BoardEnum{
         guard (0..<nbLignes).contains(ligne) && (0..<nbColonnes).contains(colonne) else {
             return BoardEnum.failed
@@ -90,6 +105,9 @@ public struct Board : CustomStringConvertible {
         return BoardEnum.ok
     }
     
+    ///
+    /// Regarde si la grille est pleine, retourne vrai ou faux
+    ///
     public func isFull()->Bool{
         for l in grid{
             for c in l {
@@ -101,10 +119,16 @@ public struct Board : CustomStringConvertible {
         return true
     }
     
+    ///
+    /// Regarde si la colonne de la grille est pleine, retourne vrai ou faux
+    ///
     public func colonneIsFull(numColonne: Int)->Bool{
         return grid[nbLignes-1][numColonne] != nil
     }
     
+    ///
+    /// Retourne la valeur des cordonnées prix en paramètre
+    ///
     public func subSript(ligne: Int, colonne: Int)-> Int? {
         guard (0..<nbLignes).contains(ligne) && (0..<nbColonnes).contains(colonne) else {
             return nil
@@ -112,6 +136,9 @@ public struct Board : CustomStringConvertible {
         return grid[ligne][colonne]
     }
     
+    ///
+    /// Retourne le nombre de pièce du joueur en paramètre
+    ///
     public func nbJoueur(numJoueur: Int)->Int{
         var nb = 0
         for l in grid{

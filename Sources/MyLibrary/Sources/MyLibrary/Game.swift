@@ -26,6 +26,9 @@ public class Game{
         self.rule = regle
     }
     
+    ///
+    /// Génère une partie
+    ///
      public func jouer()-> RulesEnum{
         afficheurBoard(board)
         while (board.isFull() == false) {

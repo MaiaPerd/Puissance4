@@ -7,6 +7,9 @@
 
 import Foundation
 
+///
+/// Enum RulesEnum: Les différents cas de réusite d'une partie
+///
 public enum RulesEnum : Equatable{
     case unkown
     case egalite
@@ -16,6 +19,9 @@ public enum RulesEnum : Equatable{
    
 }
 
+///
+/// Enum Combinaison: Les différentes combinaison posible pour gagner
+///
 public enum Combinaison{
     case unkown
     case ligne

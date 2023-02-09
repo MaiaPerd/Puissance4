@@ -7,6 +7,10 @@
 
 import Foundation
 
+///
+/// Class IALigne: hérite de IA
+/// Cette classe est une IA qui va essayer de gagner en fessant une ligne
+///
 public class IALigne: IA {
 
     private var numPlayer: Int

@@ -24,10 +24,16 @@ public struct BasicRule : Rules{
       
     }
     
+    ///
+    /// Créer un board en respectant le nombre de colonnes et de lignes des variables de la struct
+    ///
     public func createBoard() -> Board {
         return Board(colonnes: BasicRule.nbColonnes, lignes: BasicRule.nbLignes)!
     }
     
+    ///
+    /// Vérifie que le coup est possible dans le board
+    ///
     public func isValid(board: Board, newPieceColonne colonne: Int) -> Bool {
         guard colonne < BasicRule.nbColonnes && colonne >= 0 else {
             return false
@@ -35,6 +41,9 @@ public struct BasicRule : Rules{
         return !board.colonneIsFull(numColonne: colonne)
     }
     
+    ///
+    /// Renvoie le numéro du prochain joueur qui doit joué
+    ///
     public func getNextPlayer(board: Board) -> Int {
         let j1 = board.nbJoueur(numJoueur: joueur1)
         let j2 = board.nbJoueur(numJoueur: joueur2)
@@ -45,6 +54,9 @@ public struct BasicRule : Rules{
         }
     }
     
+    ///
+    /// Regarde si la partie est terminer, si oui alors il retournera une instance de RulesEnum avec le résultat de la partie
+    ///
     public func gameEnd(board: Board, newPiece position: Int) ->  RulesEnum{
         guard boardIsValide(board: board) else {return RulesEnum.erreur}
         if !(ligneAlign(board: board, position: position) == RulesEnum.unkown) {
@@ -66,49 +78,64 @@ public struct BasicRule : Rules{
         
     }
     
+    ///
+    /// Vérifie que le board correspond a la régle
+    ///
     private func boardIsValide(board: Board)-> Bool{
         return board.nbColonnes == BasicRule.nbColonnes && board.nbLignes == BasicRule.nbLignes
     }
     
+    ///
+    /// Retourne le plus petit coup possible pour gagner autours de la colonne en paramètre
+    ///
     private func minColonne(_ colonne: Int) -> Int{
         var minColonne = (colonne - (nbPieceAlign-1))
         if minColonne < 0 { minColonne = 0}
         return minColonne
     }
     
+    ///
+    /// Retourne le plus grand coup possible pour gagner autours de la colonne en paramètre
+    ///
     private func maxColonne(_ colonne: Int) -> Int{
         var maxColonne = (colonne + (nbPieceAlign-1))
         if maxColonne > BasicRule.nbColonnes-1 { maxColonne = BasicRule.nbColonnes-1}
         return maxColonne
     }
     
- public func ligneAlign(board: Board, position colonne: Int) -> RulesEnum {
-     var joueursCountLigne = [0,0]
-     for l in board.grid{
-         joueursCountLigne = [0,0]
-         for i in minColonne(colonne)...maxColonne(colonne) {
-             if l[i] == joueur1 {
-                joueursCountLigne[0] += 1
-                 if joueursCountLigne[0] == nbPieceAlign {
-                     return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.ligne, positionStart: [(board.grid.firstIndex(of: l) ?? 0), i-(nbPieceAlign-1)]) }
+    ///
+    /// Retourne une RulesEnum qui détermine s'il y a un gagnant avec une ligne
+    ///
+    public func ligneAlign(board: Board, position colonne: Int) -> RulesEnum {
+        var joueursCountLigne = [0,0]
+        for l in board.grid{
+             joueursCountLigne = [0,0]
+             for i in minColonne(colonne)...maxColonne(colonne) {
+                 if l[i] == joueur1 {
+                    joueursCountLigne[0] += 1
+                     if joueursCountLigne[0] == nbPieceAlign {
+                         return RulesEnum.joueur(joueur: joueur1, combinaison: Combinaison.ligne, positionStart: [(board.grid.firstIndex(of: l) ?? 0), i-(nbPieceAlign-1)]) }
+                        joueursCountLigne[1] = 0
+                    }
+                if l[i] == joueur2 {
+                    joueursCountLigne[1] += 1
+                    if joueursCountLigne[1] == nbPieceAlign {
+                        return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.ligne, positionStart: [(board.grid.firstIndex(of: l) ?? 0), i-(nbPieceAlign-1)]) }
+                        joueursCountLigne[0] = 0
+                    }
+                if l[i] == nil{
+                    joueursCountLigne[0] = 0
                     joueursCountLigne[1] = 0
                 }
-            if l[i] == joueur2 {
-                joueursCountLigne[1] += 1
-                if joueursCountLigne[1] == nbPieceAlign {
-                    return RulesEnum.joueur(joueur: joueur2, combinaison: Combinaison.ligne, positionStart: [(board.grid.firstIndex(of: l) ?? 0), i-(nbPieceAlign-1)]) }
-                    joueursCountLigne[0] = 0
-                }
-            if l[i] == nil{
-                joueursCountLigne[0] = 0
-                joueursCountLigne[1] = 0
             }
-        }
-        
+            
         }
         return RulesEnum.unkown
     }
     
+    ///
+    /// Retourne une RulesEnum qui détermine s'il y a un gagnant avec une colonne
+    ///
     private func colonneAlign(board: Board, position colonne: Int) -> RulesEnum {
         var joueurs1CountColonne = Array(repeating: 0, count: BasicRule.nbColonnes)
         var joueurs2CountColonne = Array(repeating: 0, count: BasicRule.nbColonnes)
@@ -137,6 +164,9 @@ public struct BasicRule : Rules{
         return RulesEnum.unkown
     }
     
+    ///
+    /// Retourne une RulesEnum qui détermine s'il y a un gagnant avec une diagonal qui va vers la droite
+    ///
     private func diaganalAlignDroite(board: Board, position numColonne: Int) -> RulesEnum {
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
@@ -164,29 +194,13 @@ public struct BasicRule : Rules{
             }
             
         }
-        /*/
-        var joueurs1CountColonneDroite = Array(repeating: 0, count: nbColonnes)
-        var joueurs2CountColonneDroite = Array(repeating: 0, count: nbColonnes)
-        var diagonal = 0
-        for l in board.grid{
-            for i in diagonal..<(nbColonnes){
-                if l[i] == 1 {
-                    joueurs1CountColonneDroite[i-diagonal] += 1
-                    if joueurs1CountColonneDroite[i-diagonal] == nbPieceAlign { return RulesEnum.joueur(1, Combinaison.diagonalDroite) }
-                    joueurs2CountColonneDroite[i-diagonal] = 0
-                }
-                if l[i] == 2 {
-                    joueurs2CountColonneDroite[i-diagonal] += 1
-                    if joueurs2CountColonneDroite[i-diagonal] == nbPieceAlign { return RulesEnum.joueur(2, Combinaison.diagonalDroite) }
-                    joueurs1CountColonneDroite[i-diagonal] = 0
-                }
-            }
-            diagonal += 1
-        }*/
-
+      
         return RulesEnum.unkown
     }
     
+    ///
+    /// Retourne une RulesEnum qui détermine s'il y a un gagnant avec une diagonal qui va vers la gauche
+    ///
     private func diaganalAlignGauche(board: Board, position numColonne: Int) -> RulesEnum {
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
@@ -213,26 +227,7 @@ public struct BasicRule : Rules{
             }
             
         }
-        /*
-        var joueurs1CountColonneGauche = Array(repeating: 0, count: nbColonnes)
-        var joueurs2CountColonneGauche = Array(repeating: 0, count: nbColonnes)
-        var diagonal = 0
-        while(diagonal < nbColonnes){
-            for i in (0..<(nbLignes-diagonal)).reversed(){
-                if board.grid[i+diagonal][i] == 1 {
-                    joueurs1CountColonneGauche[diagonal] += 1
-                    if joueurs1CountColonneGauche[diagonal] == nbPieceAlign { return RulesEnum.joueur(1, Combinaison.diagonalGauche) }
-                    joueurs2CountColonneGauche[diagonal] = 0
-                }
-                if board.grid[i+diagonal][i] == 2 {
-                    joueurs2CountColonneGauche[diagonal] += 1
-                    if joueurs2CountColonneGauche[diagonal] == nbPieceAlign { return RulesEnum.joueur(2, Combinaison.diagonalGauche) }
-                    joueurs1CountColonneGauche[diagonal] = 0
-                }
-            }
-            diagonal += 1
-        }
-      */
+        
         return RulesEnum.unkown
     }
     

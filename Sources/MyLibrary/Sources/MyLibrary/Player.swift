@@ -22,6 +22,9 @@ public class Player{
         self.nom = nom
     }
     
+    ///
+    /// Retourne la valeur choisis par le player
+    ///
     public func choisirColonne(LeBoard board: Board, LaRegle regle: Rules)->Int?{
         return nil
     }

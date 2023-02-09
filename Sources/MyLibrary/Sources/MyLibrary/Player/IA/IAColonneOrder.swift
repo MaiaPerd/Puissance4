@@ -7,6 +7,10 @@
 
 import Foundation
 
+///
+/// Class IAColonneOrder: hérite de IA
+/// Cette classe est une IA qui joue dans la première colonne disponible en partant de la gauche
+///
 public class IAColonneOrder: IA {
 
     public override init(){
