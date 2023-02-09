@@ -10,13 +10,13 @@ steps:
   - name: build
     image: swift:latest
     commands:
-      - cd Sources/HelloLibrary
+      - cd Sources/MyLibrary
       - swift build
 
   - name: tests_Model
     image: swift:latest
     commands:
-      - cd Sources/HelloLibrary
+      - cd Sources/MyLibrary
       - swift test
     depends_on: [build]
       
