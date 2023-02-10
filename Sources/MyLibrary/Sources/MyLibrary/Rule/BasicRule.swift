@@ -9,6 +9,7 @@ import Foundation
 
 ///
 /// Struct BasicRule: regles classique du puissance 4
+/// Implémente le protocole ``Rules``
 ///
 public struct BasicRule : Rules{
     private let joueur1 = 1
@@ -170,16 +171,15 @@ public struct BasicRule : Rules{
     private func diagonalAlignDroite(board: Board, position numColonne: Int) -> RulesEnum {
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
-        let grid = board.grid
         for ligne in 0..<BasicRule.nbLignes-(nbPieceAlign){
             for i in minColonne(numColonne)...(maxColonne(numColonne)-(nbPieceAlign-1)) {
                 joueurs1CountColonne = 0
                 joueurs2CountColonne = 0
                 for nombre in 0..<nbPieceAlign{
-                    if grid[ligne+nombre][i+nombre] == joueur1 {
+                    if board.subSript(ligne: ligne+nombre, colonne: i+nombre) == joueur1 {
                         joueurs1CountColonne = joueurs1CountColonne + 1
                         joueurs2CountColonne = 0
-                    } else if grid[ligne+nombre][i+nombre] == joueur2 {
+                    } else if board.subSript(ligne: ligne+nombre, colonne: i+nombre) == joueur2 {
                         joueurs2CountColonne = joueurs2CountColonne + 1
                         joueurs1CountColonne = 0
                     } else {
@@ -204,16 +204,15 @@ public struct BasicRule : Rules{
     private func diagonalAlignGauche(board: Board, position numColonne: Int) -> RulesEnum {
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
-        let grid = board.grid
         for ligne in (0..<BasicRule.nbLignes-nbPieceAlign){
             for i in ((minColonne(numColonne)+(nbPieceAlign-1))...maxColonne(numColonne)).reversed() {
                 joueurs1CountColonne = 0
                 joueurs2CountColonne = 0
                 for nombre in 0..<nbPieceAlign{
-                    if grid[ligne+nombre][i-nombre] == joueur1 {
+                    if board.subSript(ligne: ligne+nombre, colonne: i-nombre) == joueur1 {
                         joueurs1CountColonne = joueurs1CountColonne + 1
                         joueurs2CountColonne = 0
-                    } else if grid[ligne+nombre][i-nombre] == joueur2 {
+                    } else if board.subSript(ligne: ligne+nombre, colonne: i-nombre) == joueur2 {
                         joueurs2CountColonne = joueurs2CountColonne + 1
                         joueurs1CountColonne = 0
                     } else {
@@ -230,9 +229,5 @@ public struct BasicRule : Rules{
         
         return RulesEnum.unkown
     }
-    
-    
-    
-    
     
 }

@@ -18,6 +18,15 @@ public class Game{
     private var board: Board
     private let rule: Rules
     
+    
+    ///
+    /// Initializeur qui crée une game
+    ///
+    ///  # Parameter
+    /// - joueur1: ``Player``
+    /// - joueur2: ``Player``
+    /// - regle: ``Rules``
+    ///
     public init(joueur1: Player, joueur2: Player, regle: Rules, afficheur: @escaping (String)->Void, afficheurBoard: @escaping (Board)->Void ) {
         self.afficheur = afficheur
         self.afficheurBoard = afficheurBoard

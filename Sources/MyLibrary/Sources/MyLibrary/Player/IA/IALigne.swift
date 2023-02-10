@@ -8,7 +8,7 @@
 import Foundation
 
 ///
-/// Class IALigne: hérite de IA
+/// Class IALigne: hérite de ``IA``
 /// Cette classe est une IA qui va essayer de gagner en fessant une ligne
 ///
 public class IALigne: IA {
@@ -29,7 +29,7 @@ public class IALigne: IA {
         for ligne in 0..<board.nbLignes{
             var nbPiecePosisible = Array<Int>()
             for colonne in 0..<(board.nbColonnes){
-                if board.grid[ligne][colonne] == nil {
+                if board.subSript(ligne: ligne, colonne: colonne) == nil {
                     nbPiecePosisible.append(colonne)
                 } else {
                     nbPiecePosisible = []

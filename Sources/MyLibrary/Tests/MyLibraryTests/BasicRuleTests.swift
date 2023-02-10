@@ -128,7 +128,7 @@ final class BasicRuleTests: XCTestCase {
     }
     
     func testUnitCreateBoard() throws {
-        var board = BasicRule().createBoard()
+        let board = BasicRule().createBoard()
         XCTAssertEqual(board.nbColonnes, BasicRule.nbColonnes)
         XCTAssertEqual(board.nbLignes, BasicRule.nbLignes)
     }

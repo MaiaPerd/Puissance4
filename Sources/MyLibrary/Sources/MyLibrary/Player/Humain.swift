@@ -8,7 +8,7 @@
 import Foundation
 
 ///
-/// Class Humain: hérite de Player
+/// Class Humain: hérite de ``Player``
 /// Cette classe créer un humain qui poura joué
 ///
 public class Humain: Player{

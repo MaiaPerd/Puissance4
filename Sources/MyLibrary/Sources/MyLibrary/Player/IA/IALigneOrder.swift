@@ -8,7 +8,7 @@
 import Foundation
 
 ///
-/// Class IALigneOrder hérite de IA
+/// Class IALigneOrder hérite de ``IA``
 /// Cette classe est une IA qui va essayer de gagner en faisant une ligne
 ///
 public class IALigneOrder: IA {

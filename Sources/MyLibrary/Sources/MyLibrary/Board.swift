@@ -31,12 +31,18 @@ public struct Board : CustomStringConvertible {
     
     private static let descritionMapper: [Int?:String] = [nil:"-",1:"O",2:"X"]
     
+    /// Nombre de colonnes de la grille
     public let nbColonnes: Int
+    /// Nombre de lignes de la grille
     public let nbLignes: Int
+    /// La grille
     var grid: [[Int?]]
     
     ///
     /// Initializeur qui crée un board avec une grille déjà existante
+    ///
+    ///  # Parameter
+    /// - grid:``[[Int?]]``
     ///
     public init?(grid: [[Int?]]) {
         guard grid.count > 0 && grid[0].count > 0 else {
@@ -53,6 +59,10 @@ public struct Board : CustomStringConvertible {
     
     ///
     /// Initializeur qui crée un board avec une grille qui a les dimention des variable en paramètre
+    ///
+    ///  # Parameter
+    /// - nbColonnes: ``Int``
+    /// - nbLignes: ``Int``
     ///
     public init?(colonnes nbColonnes: Int, lignes nbLignes: Int) {
         guard nbLignes > 0 && nbColonnes > 0 else {
