@@ -29,7 +29,7 @@ public class IAColonne: IA {
         for colonne in 0..<board.nbColonnes{
             var nbPiecePosisible = 0
             for ligne in 0..<board.nbLignes{
-                if board.grid[ligne][colonne] == nil{
+                if board.subSript(ligne: ligne, colonne: colonne) == nil{
                     nbPiecePosisible = nbPiecePosisible + 1
                 }
             }

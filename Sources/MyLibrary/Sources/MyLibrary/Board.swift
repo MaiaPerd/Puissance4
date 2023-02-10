@@ -93,7 +93,7 @@ public struct Board : CustomStringConvertible {
     }
     
     ///
-    /// Supprime une pièce
+    /// Supprime une pièce de la grille
     ///
     private mutating func removePiece(id: Int, ligne: Int, colonne: Int)-> BoardEnum{
         guard (0..<nbLignes).contains(ligne) && (0..<nbColonnes).contains(colonne) else {

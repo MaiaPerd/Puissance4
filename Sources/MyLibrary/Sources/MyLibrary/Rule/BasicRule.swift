@@ -65,11 +65,11 @@ public struct BasicRule : Rules{
         if !(colonneAlign(board: board, position: position) == RulesEnum.unkown) {
             return colonneAlign(board: board, position: position)
         }
-        if !(diaganalAlignDroite(board: board, position: position) == RulesEnum.unkown) {
-            return diaganalAlignDroite(board: board, position: position)
+        if !(diagonalAlignDroite(board: board, position: position) == RulesEnum.unkown) {
+            return diagonalAlignDroite(board: board, position: position)
         }
-        if !(diaganalAlignGauche(board: board, position: position) == RulesEnum.unkown) {
-            return diaganalAlignGauche(board: board, position: position)
+        if !(diagonalAlignGauche(board: board, position: position) == RulesEnum.unkown) {
+            return diagonalAlignGauche(board: board, position: position)
         }
         if board.isFull() {
             return RulesEnum.egalite
@@ -167,7 +167,7 @@ public struct BasicRule : Rules{
     ///
     /// Retourne une RulesEnum qui détermine s'il y a un gagnant avec une diagonal qui va vers la droite
     ///
-    private func diaganalAlignDroite(board: Board, position numColonne: Int) -> RulesEnum {
+    private func diagonalAlignDroite(board: Board, position numColonne: Int) -> RulesEnum {
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
         let grid = board.grid
@@ -201,7 +201,7 @@ public struct BasicRule : Rules{
     ///
     /// Retourne une RulesEnum qui détermine s'il y a un gagnant avec une diagonal qui va vers la gauche
     ///
-    private func diaganalAlignGauche(board: Board, position numColonne: Int) -> RulesEnum {
+    private func diagonalAlignGauche(board: Board, position numColonne: Int) -> RulesEnum {
         var joueurs1CountColonne = 0
         var joueurs2CountColonne = 0
         let grid = board.grid

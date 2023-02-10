@@ -35,19 +35,30 @@ func AfficheBoard(LeBoard board: Board){
 
 var basicRule = BasicRule()
 
-var h = Humain(scanner: Scanner)
+//Partie Humain / Humain
+
+var h = Humain(scanner: Scanner) // Humain(nom: "nom", scanner: Scanner)
+
+var game = Game(joueur1: Humain(nom: "Maia" ,scanner: Scanner), joueur2: h, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)
+//game.jouer()
+
+//Partie Humain / IA
 
 var ia = IA()
-
 var ia2 = IAColonneOrder()
-
 var ia3 = IALigneOrder()
 
-var ia4 = IAColonne(numPlayer: 2)
-var ia5 = IAColonne(numPlayer: 1)
-var ia6 = IALigne(numPlayer: 1)
-var ia7 = IALigne(numPlayer: 2)
+var ia4 = IAColonne(numPlayer: 2) // faire attention a bien l'utilisé en joueur 2
+var ia5 = IALigne(numPlayer: 2) // faire attention a bien l'utilisé en joueur 2
 
-var game = Game(joueur1: h, joueur2: ia, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)
+var game2 = Game(joueur1: Humain(nom: "Maia" ,scanner: Scanner), joueur2: ia, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)
+//game2.jouer()
 
-game.jouer()
+//Partie IA / IA
+
+var ia6 = IAColonne(numPlayer: 1) // faire attention a bien l'utilisé en joueur 1
+var ia7 = IALigne(numPlayer: 1) // faire attention a bien l'utilisé en joueur 1
+
+var game3 = Game(joueur1: ia, joueur2: ia, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)
+game3.jouer()
+

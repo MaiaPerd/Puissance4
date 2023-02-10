@@ -26,7 +26,7 @@ public class IA: Player{
     }
     
     ///
-    /// Retourn une valeur aléatoire entre 0 et le nombre de colonne du board en paramètre
+    /// Retourne une valeur aléatoire entre 0 et le nombre de colonne du board en paramètre
     ///
     internal func random(LeBoard board: Board, regle: Rules) -> Int?{
         var r = Int.random(in: 0..<board.nbColonnes)
