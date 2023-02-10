@@ -26,7 +26,7 @@ Ce projet est divisé en deux :
 
 # Diagramme de classe
 
-<img src="Documentation/diagramme/Diagramme_de_classe.png"/>  
+<img src="Documentation/diagramme/Diagramme_de_classe.png" />  
 
 ## Struct Board:
 
@@ -65,12 +65,15 @@ Pour lancer une partie aller dans l'application console puis dans le dossier Pui
 Vous pouvais choisir les joueurs que vous vouler dans la classe game:
 
 ```var h = Humain(scanner: Scanner) // Humain(nom: "nom", scanner: Scanner)```
+
 ```var ia = IA()```
 
 ```var ia2 = IAColonneOrder()```
+
 ```var ia3 = IALigneOrder()```
 
 ```var game = Game(joueur1: h, joueur2: ia, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)```
+
 ```game.jouer()```
 
 Après votre choix exécuté l'application console.
