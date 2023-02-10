@@ -8,7 +8,7 @@
 import Foundation
 
 ///
-/// Class Game: Permet de joueur une partie de 2 joueurs de puissance 4
+/// Class Game: Permet de jouer une partie de 2 joueurs de puissance 4
 ///
 public class Game{
     
