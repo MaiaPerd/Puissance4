@@ -26,7 +26,9 @@ Ce projet est divisé en deux :
 
 # Diagramme de classe
 
-<img src="Documentation/diagramme/Diagramme_de_classe.png" />  
+[**Diagramme**](https://codefirst.iut.uca.fr/git/cecile.bonal/Documentation/diagramme/Diagramme_de_classe.png)
+
+<img src="Documentation/diagramme/Diagramme_de_classe.png" height=200/>  
 
 ## Struct Board:
 
