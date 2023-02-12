@@ -62,23 +62,9 @@ Cloné le dépôt du projet: ```git clone https://codefirst.iut.uca.fr/git/maia.
 
 # Déroulement d'une partie
 
-Pour lancer une partie aller dans l'application console puis dans le dossier Puissance4 et ouvrir le fichier main.
+Pour lancer une partie lancer l'application console via **xcode**.
 
-Vous pouvais choisir les joueurs que vous vouler dans la classe game:
-
-```var h = Humain(scanner: Scanner) // Humain(nom: "nom", scanner: Scanner)```
-
-```var ia = IA()```
-
-```var ia2 = IAColonneOrder()```
-
-```var ia3 = IALigneOrder()```
-
-```var game = Game(joueur1: h, joueur2: ia, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)```
-
-```game.jouer()```
-
-Après votre choix exécuté l'application console.
+Vous pourrais choisir entre plusieur IA et une personne.
 
 # Auteurs
 Maïa PERDERIZET
