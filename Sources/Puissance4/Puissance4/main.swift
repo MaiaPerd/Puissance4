@@ -43,7 +43,7 @@ func choisirJoueur()->Int{
         if let s = saisie {
             res = Int(s) ?? nil
         }
-        if var r = res {
+        if let r = res {
             if r <= 0 || r > 6 {
                 print("Saisie incorrect \n")
                 res = nil
@@ -102,8 +102,8 @@ afficherJoueur()
 var player2 = selectPlayer(n: choisirJoueur(), numJoueur: 2)
 
 // Lancement de la partie
-var partie = Game(joueur1: player1, joueur2: player2, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard)
-partie.jouer()
+var res = Game(joueur1: player1, joueur2: player2, regle: basicRule, afficheur: Affiche, afficheurBoard: AfficheBoard).jouer()
+
 
 
 //---------------------------------------------------------------//
