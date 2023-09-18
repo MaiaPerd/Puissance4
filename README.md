@@ -1,4 +1,3 @@
-[![Build Status](https://codefirst.ddns.net/api/badges/maia.perderizet/Puissance4/status.svg)](https://codefirst.ddns.net/maia.perderizet/Puissance4)  
 
 # Puissance4
 
