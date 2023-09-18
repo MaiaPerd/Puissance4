@@ -1,4 +1,3 @@
-
 # Puissance4
 
 Bienvenu sur le projet puissance4!
@@ -50,10 +49,6 @@ Une partie est composé de 2 joueurs, d'un board et d'une règle.
 
 Le projet est en **swift**, je vous conseille de le lancé sur **xcode**.
 
-# Installation
-
-Cloné le dépôt du projet: ```git clone https://codefirst.iut.uca.fr/git/maia.perderizet/Puissance4.git```.
-
 ## Lancement:
 
 - Ouvrir la solution dans xcode.
@@ -67,6 +62,4 @@ Vous pourrais choisir entre plusieur IA et une personne.
 
 # Auteurs
 Maïa PERDERIZET
-
-_Generated with a_ **Code#0** _template_  
-<img src="Documentation/doc_images/CodeFirst.png" height=40/>   
+ 
