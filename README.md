@@ -10,8 +10,7 @@ Le puissance 4 est un jeu classique qui se joue à deux joueurs où il faut alig
 - [Architecture du projet](#architecture_du_projet)
 - [Diagramme de classe](#diagramme_de_classe)
 - [Requirements](#requirements)
-- [Installation](#installation)
-    - [Lancement:](#lancement)
+- [Lancement:](#lancement)
 - [Déroulement d'une partie](#deroulement_d_une_partie)
 - [Auteurs](#auteurs)
 
