@@ -1,8 +1,8 @@
 # Puissance4
 
-Bienvenu sur le projet puissance4!
+Bienvenue sur le projet puissance4!
 
-Le puissance 4 est un jeu classique qui se joue à deux joueurs où il faut aligner 4 pions pour gagner.
+Puissance 4 est un jeu classique qui se joue à deux joueurs où il faut aligner 4 pions pour gagner.
 
 # Sommaire
 
@@ -18,7 +18,7 @@ Le puissance 4 est un jeu classique qui se joue à deux joueurs où il faut alig
 
 Ce projet est divisé en deux :
 
--	MyLibrary : package composer des sources du projet et des tests
+-	MyLibrary : package composé des sources du projet et des tests
 -	Puissance4 : application console
 
 # Diagramme de classe
@@ -29,24 +29,24 @@ Ce projet est divisé en deux :
 
 ## Struct Board:
 
-Cette struct va construire la grille du jeu.
+Sert à construire la grille du jeu.
 
 ## Classe Player:
 
-Cette classe représente le joueur de la partie.
+Représente le joueur de la partie.
 
 ## Protocole Rules:
 
-Rules est implémenté par les classes ou structs définissant les régles du puissances 4 ou ces variantes.
+Rules est implémenté par les classes ou structs définissant les régles du puissances 4 ou de ses variantes.
 
 ## Classe Game:
 
-Créer et permet de lancer une partie de puissance 4.
-Une partie est composé de 2 joueurs, d'un board et d'une règle.
+Permet de créer et de lancer une partie de puissance 4.
+Une partie est composée de 2 joueurs, d'un board et d'une règle.
 
 # Requirements
 
-Le projet est en **swift**, je vous conseille de le lancé sur **xcode**.
+Le projet est en **swift**, je vous conseille de le lancer sur **xcode**.
 
 ## Lancement:
 
@@ -57,7 +57,7 @@ Le projet est en **swift**, je vous conseille de le lancé sur **xcode**.
 
 Pour lancer une partie lancer l'application console via **xcode**.
 
-Vous pourrais choisir entre plusieur IA et une personne.
+Vous pourrez choisir entre plusieurs IA et une personne.
 
 # Auteurs
 Maïa PERDERIZET
